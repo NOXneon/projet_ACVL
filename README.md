@@ -8,3 +8,5 @@ Pour lancer le build, il faut
 Le projet va se lancer. Le site web est disponible à l'adresse : http://localhost:8080/Theater. 
 
 Pour l'utilisation du site web, voir le manuel utilisateur.
+
+Il existe un fichier Test dans src, permettant de tester les différentes fonctions. 
