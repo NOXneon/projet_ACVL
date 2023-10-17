@@ -124,6 +124,17 @@ public class Test
             System.out.println(reservation.recap());
             System.out.println("Fin récap");
 
+            System.out.println("Réservation : ");
+            Reservation reservation1 = ((Client) client).reserverPlace(representation1, Theatre.getSalle().getZone_Balcon(), place21);
+            System.out.println("Récap");
+            System.out.println(reservation1.recap());
+            System.out.println("Fin récap");
+
+            System.out.println("Annulation de la réservation");
+            ((Client) client).annulerReservation(reservation1);
+            System.out.println("Liste des réservations du client");
+            System.out.println(((Client) client).listerReservations());
+
             System.out.println("Liste des réservations du client");
             System.out.println(((Client) client).listerReservations());
             // Test de réservation d'une place déjà réservée
