@@ -24,16 +24,16 @@ public class Test
         //------------------------- Création des places -------------------------
         // Rang 1
         Place place11 = new Place("n°1","Rang n°1");
-        Place place21 = new Place("n°1","Rang n°1");
-        Place place31 = new Place("n°1","Rang n°1");
+        Place place21 = new Place("n°2","Rang n°1");
+        Place place31 = new Place("n°3","Rang n°1");
         // Rang 2
         Place place12 = new Place("n°1","Rang n°1");
-        Place place22 = new Place("n°1","Rang n°1");
-        Place place32 = new Place("n°1","Rang n°1");
+        Place place22 = new Place("n°2","Rang n°1");
+        Place place32 = new Place("n°3","Rang n°1");
         // Rang 3
         Place place13 = new Place("n°1","Rang n°1");
-        Place place23 = new Place("n°1","Rang n°1");
-        Place place33 = new Place("n°1","Rang n°1");
+        Place place23 = new Place("n°2","Rang n°1");
+        Place place33 = new Place("n°3","Rang n°1");
         //------------------------- Fin création des places -------------------------
 
         //------------------------- Attribution des places aux zones -------------------------
