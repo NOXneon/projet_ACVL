@@ -21,17 +21,17 @@ public class Test
 
         //------------------------- Création des places -------------------------
         // Rang 1
-        Place place11 = new Place("n°1","Rang n°1");
-        Place place21 = new Place("n°2","Rang n°1");
-        Place place31 = new Place("n°3","Rang n°1");
+        Place place11 = new Place("1","1");
+        Place place21 = new Place("2","1");
+        Place place31 = new Place("3","1");
         // Rang 2
-        Place place12 = new Place("n°1","Rang n°1");
-        Place place22 = new Place("n°2","Rang n°1");
-        Place place32 = new Place("n°3","Rang n°1");
+        Place place12 = new Place("1","1");
+        Place place22 = new Place("2","1");
+        Place place32 = new Place("3","1");
         // Rang 3
-        Place place13 = new Place("n°1","Rang n°1");
-        Place place23 = new Place("n°2","Rang n°1");
-        Place place33 = new Place("n°3","Rang n°1");
+        Place place13 = new Place("1","1");
+        Place place23 = new Place("2","1");
+        Place place33 = new Place("3","1");
         //------------------------- Fin création des places -------------------------
 
         //------------------------- Attribution des places aux zones -------------------------
@@ -190,7 +190,7 @@ public class Test
                     case 1:
                         for(Place p : Theatre.getSalle().getZone_Balcon().getPlaces())
                         {
-                            if(p.getNum_place().contains(num_place) && p.getNum_rang().contains(num_rang))
+                            if(p.getNum_place().equals(num_place) && p.getNum_rang().equals(num_rang))
                             {
                                 System.out.println("Place choisie :");
                                 System.out.println(p.descriptif());
@@ -201,7 +201,7 @@ public class Test
                     case 2:
                         for(Place p : Theatre.getSalle().getZone_Poulailler().getPlaces())
                         {
-                            if(p.getNum_place().contains(num_place) && p.getNum_rang().contains(num_rang))
+                            if(p.getNum_place().equals(num_place) && p.getNum_rang().equals(num_rang))
                             {
                                 System.out.println("Place choisie :");
                                 System.out.println(p.descriptif());
@@ -212,7 +212,7 @@ public class Test
                     case 3:
                         for(Place p : Theatre.getSalle().getZone_Orchestre().getPlaces())
                         {
-                            if(p.getNum_place().contains(num_place) && p.getNum_rang().contains(num_rang))
+                            if(p.getNum_place().equals(num_place) && p.getNum_rang().equals(num_rang))
                             {
                                 System.out.println("Place choisie :");
                                 System.out.println(p.descriptif());
@@ -267,6 +267,7 @@ public class Test
                     break outerloop;
                 }
 
+                System.out.println("Réservation : ");
                 Representation representation = spectacle.getRepresentations().get(rep_choisie-1);
                 Zone zone = Theatre.getSalle().getZone(zone_choisie);
 
@@ -274,6 +275,21 @@ public class Test
                 System.out.println("Récap");
                 System.out.println(reservation.recap());
                 System.out.println("Fin récap");
+
+                System.out.println("Voulez vous annuler ?\n1) Oui\n 2) Non");
+                int annul_index = Integer.parseInt(sc.nextLine());
+
+                switch (annul_index)
+                {
+                    case 1:
+                        System.out.println("Annulation de la réservation");
+                        ((Client) client).annulerReservation(reservation);
+                        System.out.println("Liste des réservations du client");
+                        System.out.println(((Client) client).listerReservations());
+                        break;
+                    case 2:
+                        break;
+                }
 
                 flag = false;
             }
