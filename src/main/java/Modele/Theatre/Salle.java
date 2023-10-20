@@ -88,4 +88,24 @@ public final class Salle
     {
         return zone_Orchestre;
     }
+
+    public Zone getZone(int index)
+    {
+        Zone zone = null;
+        switch (index)
+        {
+            case 1:
+                zone = getZone_Balcon();
+                break;
+            case 2:
+                zone = getZone_Poulailler();
+                break;
+            case 3:
+                zone = getZone_Orchestre();
+                break;
+        }
+
+        return zone;
+    }
+
 }

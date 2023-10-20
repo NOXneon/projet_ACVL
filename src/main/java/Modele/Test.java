@@ -2,16 +2,14 @@ package Modele;
 
 import Exceptions.*;
 import Modele.Billetterie.Reservation;
-import Modele.Theatre.Place;
-import Modele.Theatre.Representation;
-import Modele.Theatre.Spectacle;
-import Modele.Theatre.Theatre;
+import Modele.Theatre.*;
 import Modele.Utilisateur.Client;
 import Modele.Utilisateur.Respo_Application;
 import Modele.Utilisateur.Respo_Programmation;
 import Modele.Utilisateur.Utilisateur;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Scanner;
 
 public class Test
 {
@@ -54,7 +52,7 @@ public class Test
         places_Orchestre.add(place13);
         places_Orchestre.add(place23);
         places_Orchestre.add(place33);
-        Theatre.getSalle().getZone_Balcon().setPlaces(places_Orchestre);
+        Theatre.getSalle().getZone_Orchestre().setPlaces(places_Orchestre);
         //------------------------- Fin attribution des places aux zones -------------------------
 
         //------------------------- Création des spectacles -------------------------
@@ -114,11 +112,180 @@ public class Test
         Utilisateur client = new Client("GRISSI","Wafi","neon","noxus","neon@gmail.com","7777777777");
         //------------------------- Fin création des utilisateurs -------------------------
 
-        System.out.println(theatre.planningSpectacles());
-
         try
         {
+            Scanner sc = new Scanner(System.in);
+            boolean flag = true;
+            outerloop:
+            while (flag)
+            {
+                System.out.println("Liste des spectacles");
+                System.out.println(theatre.planningSpectacles());
+
+                System.out.println("Pour quel spectacle voulez vous réserver une place ? (tapez le nom correspondant)");
+                for(Spectacle s : theatre.getSpectacles())
+                    System.out.println(s.getNom());
+
+                String spec_choisi = sc.nextLine();
+                if(spec_choisi.equals("exit"))
+                {
+                    flag = false;
+                    break outerloop;
+                }
+
+                int index_spec_choisi = 0;
+
+                if(spec_choisi.equalsIgnoreCase("Spectacle A"))
+                    index_spec_choisi = 1;
+
+                if(spec_choisi.equalsIgnoreCase("Spectacle B"))
+                    index_spec_choisi = 2;
+
+                if(spec_choisi.equalsIgnoreCase("Spectacle C"))
+                    index_spec_choisi = 3;
+
+                System.out.println("Dans quelle zone voulez-vous une place ? \n1- Balcon\n2- Poulailler\n3- Orchestre");
+
+                int zone_choisie = Integer.parseInt(sc.nextLine());
+                if(spec_choisi.equals("exit"))
+                {
+                    flag = false;
+                    break outerloop;
+                }
+
+                switch (zone_choisie)
+                {
+                    case 1:
+                        System.out.println("Places en balcon :");
+                        for(Place p : Theatre.getSalle().getZone_Balcon().getPlaces())
+                            System.out.println(p.descriptif());
+                        break;
+                    case 2:
+                        System.out.println("Places en poulailler :");
+                        for(Place p : Theatre.getSalle().getZone_Poulailler().getPlaces())
+                            System.out.println(p.descriptif());
+                        break;
+                    case 3:
+                        System.out.println("Places en orchestre :");
+                        for(Place p : Theatre.getSalle().getZone_Orchestre().getPlaces())
+                            System.out.println(p.descriptif());
+                        break;
+                }
+
+                System.out.println("Quelle place voulez vous ? (entrer deux digits, premier numéro de place, second numéro de rang. Exemple : 11)");
+
+                String place_choisie = sc.nextLine();
+                if(spec_choisi.equals("exit"))
+                {
+                    flag = false;
+                    break outerloop;
+                }
+
+                String num_place = Character.toString(place_choisie.charAt(0));
+                String num_rang = Character.toString(place_choisie.charAt(1));
+
+                Place place = null;
+                switch (zone_choisie)
+                {
+                    case 1:
+                        for(Place p : Theatre.getSalle().getZone_Balcon().getPlaces())
+                        {
+                            if(p.getNum_place().contains(num_place) && p.getNum_rang().contains(num_rang))
+                            {
+                                System.out.println("Place choisie :");
+                                System.out.println(p.descriptif());
+                                place = p;
+                            }
+                        }
+                        break;
+                    case 2:
+                        for(Place p : Theatre.getSalle().getZone_Poulailler().getPlaces())
+                        {
+                            if(p.getNum_place().contains(num_place) && p.getNum_rang().contains(num_rang))
+                            {
+                                System.out.println("Place choisie :");
+                                System.out.println(p.descriptif());
+                                place = p;
+                            }
+                        }
+                        break;
+                    case 3:
+                        for(Place p : Theatre.getSalle().getZone_Orchestre().getPlaces())
+                        {
+                            if(p.getNum_place().contains(num_place) && p.getNum_rang().contains(num_rang))
+                            {
+                                System.out.println("Place choisie :");
+                                System.out.println(p.descriptif());
+                                place = p;
+                            }
+                        }
+                        break;
+                }
+
+                Spectacle spectacle = theatre.getSpectacle(spec_choisi);
+
+                switch (index_spec_choisi)
+                {
+                    case 1:
+                        System.out.println("Spectacle A");
+                        System.out.println("Représentations :");
+                        int index = 1;
+                        for(Representation r : spectacle.getRepresentations())
+                        {
+                            System.out.println(index + ")\n" + r.getAffiche());
+                            index++;
+                        }
+                        break;
+                    case 2:
+                        System.out.println("Spectacle B");
+                        System.out.println("Représentations :");
+                        index = 1;
+                        for(Representation r : spectacle.getRepresentations())
+                        {
+                            System.out.println(index + ")\n" + r.getAffiche());
+                            index++;
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Spectacle C");
+                        System.out.println("Représentations :");
+                        index = 1;
+                        for(Representation r : spectacle.getRepresentations())
+                        {
+                            System.out.println(index + ")\n" + r.getAffiche());
+                            index++;
+                        }
+                        break;
+                }
+
+                System.out.println("Quelle représentation voulez-vous choisir ? (veuillez choisir le numéro, exemple : 1)");
+                int rep_choisie = Integer.parseInt(sc.nextLine());
+
+                if(spec_choisi.equals("exit"))
+                {
+                    flag = false;
+                    break outerloop;
+                }
+
+                Representation representation = spectacle.getRepresentations().get(rep_choisie-1);
+                Zone zone = Theatre.getSalle().getZone(zone_choisie);
+
+                Reservation reservation = ((Client) client).reserverPlace(representation, zone, place);
+                System.out.println("Récap");
+                System.out.println(reservation.recap());
+                System.out.println("Fin récap");
+
+                flag = false;
+            }
+
+            /*
+            System.out.println("Places :");
+            System.out.println("Balcon :");
+            for(Place p : Theatre.getSalle().getZone_Balcon().getPlaces())
+                System.out.println(p.descriptif());
+
             System.out.println("Réservation : ");
+            System.out.println("Pour quel spectacle voulez-vous effectuer une réservation ?");
             Reservation reservation = ((Client) client).reserverPlace(representation1, Theatre.getSalle().getZone_Balcon(), place11);
             System.out.println("Récap");
             System.out.println(reservation.recap());
@@ -143,23 +310,12 @@ public class Test
             ((Client) client).annulerReservation(reservation);
             System.out.println("Liste des réservations du client");
             System.out.println(((Client) client).listerReservations());
+             */
 
         }
-        catch (ExceptionRepresentationInconnue exceptionRepresentationInconnue)
+        catch (Exception e)
         {
-            exceptionRepresentationInconnue.printStackTrace();
-        }
-        catch (ExceptionZoneInconnue exceptionZoneInconnue)
-        {
-            exceptionZoneInconnue.printStackTrace();
-        }
-        catch (ExceptionPlaceInexistante exceptionPlaceInexistante)
-        {
-            exceptionPlaceInexistante.printStackTrace();
-        }
-        catch (ExceptionPlaceReservee exceptionPlaceReservee)
-        {
-            exceptionPlaceReservee.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

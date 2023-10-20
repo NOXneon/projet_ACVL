@@ -82,8 +82,8 @@ public final class Place
     {
         String desc = "";
 
-        desc += "Num rang : " + this.getNum_rang() + "\n"
-                + "Num place : " + this.getNum_place() + "\n"
+        desc += "Num place : " + this.getNum_place() + "\n"
+                + "Num rang : " + this.getNum_rang() + "\n"
                 + "Etat : " + this.getEtat() + "\n";
 
         return desc;

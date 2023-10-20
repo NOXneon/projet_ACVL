@@ -152,4 +152,22 @@ public final class Theatre
 
         return planning;
     }
+
+    /**
+     * retourne un spectacle avec un nom donné
+     * @param nom : nom du spectacle à chercher
+     * @return spectacle
+     */
+    public Spectacle getSpectacle(String nom)
+    {
+        Spectacle spectacle = null;
+
+        for(Spectacle s : spectacles)
+        {
+            if(s.getNom().equals(nom))
+                spectacle = s;
+        }
+
+        return spectacle;
+    }
 }
